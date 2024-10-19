@@ -1,0 +1,71 @@
+.# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environment directories
+venv/
+.venv/
+
+# Environment variables file
+.env
+
+# Python egg files and caches
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+wheels/
+*.manifest
+*.spec
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Distribution / packaging
+.Python
+env/
+bin/
+lib/
+lib64/
+include/
+man/
+
+# Docker files and logs
+docker-compose.override.yml
+*.log
+docker-compose.yml
+docker-compose.prod.yml
+.dockerignore
+**/Dockerfile
+
+# MySQL / Postgres data dumps
+*.sql
+*.sqlite3
+
+# macOS
+.DS_Store
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+.history/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Coverage rep

@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    container_name: fastapi_blacklist_web
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://user:password@db:5432/blacklist_db
+      - JWT_SECRET_KEY=your-jwt-secret-key
+      - SECRET_KEY=your-secret-key
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    container_name: fastapi_blacklist_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: blacklist_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:

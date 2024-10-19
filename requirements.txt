@@ -1,0 +1,9 @@
+fastapi==0.95.0
+uvicorn
+SQLAlchemy
+asyncpg
+pydantic
+python-dotenv
+alembic
+fastapi-jwt-auth
+pydantic[email]
