@@ -1,0 +1,33 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.9  # Especifica la versión de Python que estás usando
+    commands:
+      - echo Installing Python dependencies...
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
+
+  pre_build:
+    commands:
+      - echo Running pre-build steps...
+      - echo Checking for linting issues...
+      - pip install flake8
+      - flake8 .  # Si deseas hacer análisis de código, puedes agregar esto o eliminarlo si no lo usas
+
+  build:
+    commands:
+      - echo Running build steps...
+      - echo Running tests...
+      # Aquí puedes agregar los comandos para ejecutar tus pruebas
+      - pytest  # Si tienes pruebas en tu proyecto, asegúrate de que `pytest` esté instalado y configurado
+
+  post_build:
+    commands:
+      - echo Build completed!
+
+artifacts:
+  files:
+    - '**/*'  # Incluye todos los archivos en el artefacto generado
+  discard-paths: yes
