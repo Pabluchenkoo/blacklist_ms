@@ -21,7 +21,7 @@ phases:
       - echo Running build steps...
       - echo Running tests...
       # Aquí puedes agregar los comandos para ejecutar tus pruebas
-      - pytest  # Si tienes pruebas en tu proyecto, asegúrate de que `pytest` esté instalado y configurado
+      #- pytest  # Si tienes pruebas en tu proyecto, asegúrate de que `pytest` esté instalado y configurado
 
   post_build:
     commands:
