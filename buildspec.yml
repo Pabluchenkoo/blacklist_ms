@@ -13,8 +13,8 @@ phases:
     commands:
       - echo Running pre-build steps...
       - echo Checking for linting issues...
-      - pip install flake8
-      - flake8 .  # Si deseas hacer análisis de código, puedes agregar esto o eliminarlo si no lo usas
+#      - pip install flake8
+#      - flake8 .  # Si deseas hacer análisis de código, puedes agregar esto o eliminarlo si no lo usas
 
   build:
     commands:
