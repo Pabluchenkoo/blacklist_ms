@@ -69,3 +69,8 @@ docker-compose.prod.yml
 .ipynb_checkpoints
 
 # Coverage rep
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
