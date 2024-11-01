@@ -7,3 +7,7 @@ python-dotenv
 alembic
 fastapi-jwt-auth
 pydantic[email]
+pytest
+httpx
+pytest-asyncio
+aiosqlite
