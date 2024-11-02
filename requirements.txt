@@ -13,3 +13,5 @@ pytest  # Para ejecutar los tests
 pytest-asyncio  # Soporte para pruebas asíncronas
 httpx  # Cliente HTTP asíncrono para pruebas de rutas
 pytest-mock  # Utilidad para realizar mocks en pytest
+
+aiosqlite
