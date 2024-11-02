@@ -17,7 +17,7 @@ Make sure you have the following installed on your system:
    cd fastapi-blacklist-service
 2. **Build the Docker Images: Run the following command to build the Docker images for the application**:
    ```bash
-   docker-compose buil
+   docker-compose build
 3. **To start the FastAPI web service, run:**
    ```bash
    docker-compose up web
