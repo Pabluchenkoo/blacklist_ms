@@ -12,9 +12,8 @@ phases:
   build:
     commands:
       - echo Running tests with docker-compose...
-      - docker-compose up -d db  # Start the database service and wait for it to initialize
-      - sleep 15  # Allow time for the database to be ready; adjust as needed
-      - docker-compose run --rm test  # Run the tests in the 'test' service
+      - docker-compose build  # Start the database service and wait for it to initialize
+      - docker-compose up test  # Run the tests in the 'test' service
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
