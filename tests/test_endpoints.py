@@ -35,7 +35,7 @@ async def async_client():
 @pytest.fixture(scope="module")
 async def test_db():
     # Read the database URL from the environment variable
-    db_url = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///:memory:")
+    db_url = os.getenv("TEST_DATABASE_URL", "sqlite+aiosqlite:///:memory:")
     engine = create_async_engine(db_url, echo=True)
     async with engine.begin() as conn:
         await conn.run_sync(Blacklist.metadata.create_all)
