@@ -12,7 +12,7 @@ phases:
   build:
     commands:
       - echo Running tests inside Docker container...
-      - docker run --env TEST_DATABASE_URL=${TEST_DATABASE_URL} blacklist-pipeline pytest tests/ -v --maxfail=1 --tb=short --junitxml=results.xml
+      - docker run --env blacklist-pipeline pytest test/  # Ejecuta las pruebas pasando la variable de entorno
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
