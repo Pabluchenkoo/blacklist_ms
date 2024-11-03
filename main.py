@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from pydantic import BaseSettings
-from app.models import Blacklist
 from app.routes.blacklist_route import router as blacklist_router
 from app.routes.jwt_routes import router as jwt_router
 from app.database import engine
