@@ -11,8 +11,10 @@ phases:
       - docker tag blacklist-pipeline:latest 156041410933.dkr.ecr.us-east-1.amazonaws.com/blacklist-pipeline:latest
   build:
     commands:
-      - echo Running tests inside Docker container...
-      - docker run --env TEST_DATABASE_URL=postgresql+asyncpg://postgres:Qwerty123@blacklist-ms-db.chi2qeoo0z9n.us-east-1.rds.amazonaws.com:5432/blacklist_ms_db blacklist-pipeline pytest tests/  # Ejecuta las pruebas pasando la variable de entorno
+      - echo Running tests with docker-compose...
+      - docker-compose up -d db  # Start the database service and wait for it to initialize
+      - sleep 15  # Allow time for the database to be ready; adjust as needed
+      - docker-compose run --rm test  # Run the tests in the 'test' service
   post_build:
     commands:
       - echo Pushing Docker image to ECR...

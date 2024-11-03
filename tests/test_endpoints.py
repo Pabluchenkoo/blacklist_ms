@@ -1,5 +1,4 @@
 import pytest
-import os  # For reading environment variables
 from httpx import AsyncClient
 from httpx._transports.asgi import ASGITransport
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
@@ -34,9 +33,8 @@ async def async_client():
 
 @pytest.fixture(scope="module")
 async def test_db():
-    # Read the database URL from the environment variable
-    db_url = os.getenv("TEST_DATABASE_URL")
-    engine = create_async_engine(db_url, echo=True)
+    # Set up a connection to a test database
+    engine = create_async_engine("sqlite+aiosqlite:///:memory:", echo=True)
     async with engine.begin() as conn:
         await conn.run_sync(Blacklist.metadata.create_all)
     # Create session maker
