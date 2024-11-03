@@ -9,8 +9,11 @@ from fastapi_jwt_auth import AuthJWT
 from config import settings
 from fastapi.middleware.cors import CORSMiddleware
 import logging
+import sys
 
-logging.basicConfig(level=logging.INFO)
+
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+#logging.basicConfig(level=logging.INFO)
 
 class AuthJWTSettings(BaseSettings):
     authjwt_secret_key: str = settings.JWT_SECRET_KEY
@@ -47,3 +50,4 @@ def generate_static_jwt():
     access_token = Authorize.create_access_token(subject=subject, expires_time=3600)  
 
     logging.info(f"Static JWT for testing: {access_token}")
+    
