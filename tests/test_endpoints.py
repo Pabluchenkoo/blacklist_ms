@@ -1,4 +1,5 @@
 import pytest
+import os  # For reading environment variables
 from httpx import AsyncClient
 from httpx._transports.asgi import ASGITransport
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
@@ -12,6 +13,7 @@ import asyncio
 @pytest.fixture(scope="session")
 def anyio_backend():
     return "asyncio"
+
 
 @pytest.fixture(scope="session")
 def event_loop():
@@ -32,8 +34,9 @@ async def async_client():
 
 @pytest.fixture(scope="module")
 async def test_db():
-    # Set up a connection to a test database
-    engine = create_async_engine("sqlite+aiosqlite:///:memory:", echo=True)
+    # Read the database URL from the environment variable
+    db_url = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///:memory:")
+    engine = create_async_engine(db_url, echo=True)
     async with engine.begin() as conn:
         await conn.run_sync(Blacklist.metadata.create_all)
     # Create session maker
@@ -107,5 +110,3 @@ async def test_check_blacklist(async_client, test_db, auth_token):
         "blacklisted": False,
         "blocked_reason": None
     }, f"Unexpected response data: {response_data}"
-
-
