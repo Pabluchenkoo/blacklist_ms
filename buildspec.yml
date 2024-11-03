@@ -11,10 +11,8 @@ phases:
       - docker tag blacklist-pipeline:latest 156041410933.dkr.ecr.us-east-1.amazonaws.com/blacklist-pipeline:latest
   build:
     commands:
-      - echo Testing database connectivity...
-      - docker run --rm blacklist-pipeline python -c "import asyncio, asyncpg; asyncio.run(asyncpg.connect('${TEST_DATABASE_URL}'))"
       - echo Running tests inside Docker container...
-      - docker run --env TEST_DATABASE_URL=${TEST_DATABASE_URL} blacklist-pipeline pytest tests/  # Ejecuta las pruebas pasando la variable de entorno
+      - docker run --env TEST_DATABASE_URL=${postgresql+asyncpg://postgres:Qwerty123@blacklist-ms-db.chi2qeoo0z9n.us-east-1.rds.amazonaws.com:5432/blacklist_ms_db} blacklist-pipeline pytest tests/  # Ejecuta las pruebas pasando la variable de entorno
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
