@@ -49,3 +49,7 @@ services:
 
 volumes:
   postgres_data:
+
+networks:
+  default:
+    driver: bridge
