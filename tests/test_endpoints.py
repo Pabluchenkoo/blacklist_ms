@@ -33,10 +33,12 @@ async def async_client():
 
 @pytest.fixture(scope="module")
 async def test_db():
-    # Set up a connection to a test database
-    engine = create_async_engine("sqlite+aiosqlite:///:memory:", echo=True)
+    # Set up a connection to an in-memory test database or your test database URL
+    engine = create_async_engine("sqlite+aiosqlite:///:memory:", echo=True)  # Or use the database URL for docker-compose
     async with engine.begin() as conn:
-        await conn.run_sync(Blacklist.metadata.create_all)
+        # Import and create all tables here
+        from app.models import Base  # Ensure this imports the correct Base with your models
+        await conn.run_sync(Base.metadata.create_all)
     # Create session maker
     async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
     try:
