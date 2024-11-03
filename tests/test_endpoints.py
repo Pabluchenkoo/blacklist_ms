@@ -34,7 +34,7 @@ async def async_client():
 @pytest.fixture(scope="module")
 async def test_db():
     # Set up a connection to an in-memory SQLite test database
-    engine = create_async_engine("sqlite+aiosqlite:///:memory:", echo=True)
+    engine = create_async_engine("postgresql+asyncpg://user:password@db:5432/blacklist_db", echo=True)
     async with engine.begin() as conn:
         # Import models to register them with Base
         from app.database import Base  # Ensure this is the correct Base with your models
@@ -43,11 +43,8 @@ async def test_db():
     # Create session maker bound to the test engine
     async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
     
-    try:
-        yield async_session
-    finally:
-        # Dispose of the engine after the tests
-        await engine.dispose()
+    yield async_session
+    await engine.dispose()
 
 
 @pytest.mark.asyncio
