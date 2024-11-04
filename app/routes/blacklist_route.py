@@ -30,7 +30,7 @@ async def add_to_blacklist(
         blocked_reason=blacklist_data.blocked_reason,
         request_ip=request_ip
     )
-    db.add(new_entry)
+    # db.add(new_entry)
     await db.commit()
 
     return {"message": "Email added to the blacklist successfully."}

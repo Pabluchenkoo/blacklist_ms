@@ -12,8 +12,8 @@ phases:
   build:
     commands:
       - echo Running tests with docker-compose...
-      - docker-compose build  # Start the database service and wait for it to initialize
-      - docker-compose up test  # Run the tests in the 'test' service
+      - docker-compose build  
+      - docker-compose up test  
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
