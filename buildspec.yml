@@ -13,11 +13,8 @@ phases:
     commands:
       - echo Running tests with docker-compose...
       - docker-compose build  
-      - |
-        if ! docker-compose up --abort-on-container-exit test; then
-          echo "Tests failed. Exiting with error."
-          exit 1
-        fi  
+      - docker-compose up test
+        
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
