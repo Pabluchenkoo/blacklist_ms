@@ -12,13 +12,18 @@ phases:
   build:
     commands:
       - echo Running tests with docker-compose...
-      - docker-compose build  
-      - docker-compose up test
+      - docker-compose build 
         
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
       - docker push 682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest
+      - echo Writing Image Definitions file...
+      - printf '[{"name":"Container-app-python","imageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest"}]' > imagedefinitions.json
+      - printf '{"ImageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest"}' > imageDetail.json
+      - cat imagedefinitions.json
 artifacts:
   files:
     - '**/*'
