@@ -3,12 +3,12 @@ phases:
   install:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 156041410933.dkr.ecr.us-east-1.amazonaws.com
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 682033463843.dkr.ecr.us-east-1.amazonaws.com
   pre_build:
     commands:
       - echo Building Docker image...
-      - docker build -t blacklist-pipeline .
-      - docker tag blacklist-pipeline:latest 156041410933.dkr.ecr.us-east-1.amazonaws.com/blacklist-pipeline:latest
+      - docker build -t devops2024/reposd .
+      - docker tag devops2024/reposd:latest 682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest
   build:
     commands:
       - echo Running tests with docker-compose...
@@ -18,8 +18,18 @@ phases:
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
-      - docker push 156041410933.dkr.ecr.us-east-1.amazonaws.com/blacklist-pipeline:latest
+      - docker push 682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest
 artifacts:
   files:
     - '**/*'
+    - imagedefinition.json
+    - imageDetails.json
+  secondary-artifacts:
+    DefinitionArtifact:
+      files:
+        - appspec.json
+        - taskdef.json
+    ImageArtifact:
+      files:
+        - imageDetail.json
   discard-paths: yes
