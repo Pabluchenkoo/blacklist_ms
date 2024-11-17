@@ -8,6 +8,11 @@ from fastapi_jwt_auth import AuthJWT
 
 router = APIRouter()
 
+# Health Check Route
+@router.get("/health", status_code=status.HTTP_200_OK)
+async def health_check():
+    return {"status": "healthy"}
+
 @router.post("/", response_model=dict, status_code=status.HTTP_201_CREATED)
 async def add_to_blacklist(
     blacklist_data: BlacklistCreate,
