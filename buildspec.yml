@@ -14,12 +14,15 @@ phases:
       - echo Running tests with docker-compose...
       - docker-compose build  
       - docker-compose up test
-        
+      - docker-compose down  # Clean up containers after tests
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
       - docker push 156041410933.dkr.ecr.us-east-1.amazonaws.com/blacklist-pipeline:latest
+      - echo Creating imagedefinitions.json for ECS deployment...
+      - echo '[{"name":"blacklist_ms_app","imageUri":"156041410933.dkr.ecr.us-east-1.amazonaws.com/blacklist-pipeline:latest"}]' > imagedefinitions.json
 artifacts:
   files:
+    - imagedefinitions.json
     - '**/*'
   discard-paths: yes
