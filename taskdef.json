@@ -9,7 +9,7 @@
             "containerPort": 5000
           }
         ],
-        "image": "<IMAGE1_NAME>",
+        "image": "682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest",
         "essential": true,
         "name": "Container-app-python"
       }
