@@ -3,7 +3,7 @@
   "containerDefinitions": [
       {
           "name": "Container-app-python",
-          "image": "682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest",
+          "image": "<IMAGE1_NAME>",
           "essential": true,
           "portMappings": [
               {
