@@ -1,5 +1,9 @@
 version: 0.2
 phases:
+  install:
+      commands:
+        - echo Installing dependencies...
+        - pip install pytest
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -10,11 +14,11 @@ phases:
       - docker build -t devops2024/reposd .
       - docker tag devops2024/reposd:latest 682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest     
       - echo Running tests with docker-compose...
-      - pytest test
-      - docker-compose build   
   post_build:
     commands:
       - echo Build completed on `date`
+      - echo Running tests with pytest...
+      - pytest test
       - echo Pushing the Docker image...
       - docker push 682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest
       - echo Writing Image Definitions file...
