@@ -18,12 +18,11 @@ phases:
       - echo Writing Image Definitions file...
       - printf '[{"name":"Container-app-python","imageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest"}]' > imagedefinitions.json
       - printf '{"ImageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest"}' > imageDetail.json
-      - cat imagedefinitions.json
+      
 artifacts:
   files:
-    - '**/*'
     - imagedefinitions.json
     - imageDetail.json
     - appspec.yaml
-    - taskdef_processed.json
-  name: SourceArtifact
+    - taskdef.json
+  name: BuildArtifact
