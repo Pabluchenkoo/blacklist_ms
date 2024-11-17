@@ -1,0 +1,13 @@
+{
+    "family": "blacklist-ms-task",
+    "containerDefinitions": [
+      {
+        "name": "blacklist_ms_app",
+        "image": "156041410933.dkr.ecr.us-east-1.amazonaws.com/blacklist-pipeline:latest",
+        "memory": 512,
+        "cpu": 256,
+        "essential": true
+      }
+    ]
+  }
+  

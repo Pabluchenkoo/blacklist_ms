@@ -12,46 +12,13 @@ phases:
   build:
     commands:
       - echo Running tests with docker-compose...
-      - docker-compose build
+      - docker-compose build  
       - docker-compose up test
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
       - docker push 156041410933.dkr.ecr.us-east-1.amazonaws.com/blacklist-pipeline:latest
-      - echo Generating appspec.json and taskdef.json...
-      # Generate the ECS task definition
-      - |
-        printf '{
-          "family": "blacklist-task",
-          "containerDefinitions": [
-            {
-              "name": "blacklist-container",
-              "image": "%s",
-              "memory": 512,
-              "cpu": 256,
-              "essential": true
-            }
-          ]
-        }' 156041410933.dkr.ecr.us-east-1.amazonaws.com/blacklist-pipeline:latest > taskdef.json
-      # Generate the AppSpec file for CodeDeploy
-      - |
-        printf '{
-          "version": 1,
-          "Resources": [
-            {
-              "TargetService": {
-                "Type": "AWS::ECS::Service",
-                "Properties": {
-                  "TaskDefinition": "taskdef.json",
-                  "LoadBalancerInfo": {
-                    "ContainerName": "blacklist_ms_app",
-                    "ContainerPort": 80
-                  }
-                }
-              }
-            }
-          ]
-        }' > appspec.json
+
 artifacts:
   files:
     - appspec.json

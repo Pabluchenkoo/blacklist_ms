@@ -1,0 +1,18 @@
+{
+    "version": 1,
+    "Resources": [
+      {
+        "TargetService": {
+          "Type": "AWS::ECS::Service",
+          "Properties": {
+            "TaskDefinition": "taskdef.json",
+            "LoadBalancerInfo": {
+              "ContainerName": "blacklist_ms_app",
+              "ContainerPort": 80
+            }
+          }
+        }
+      }
+    ]
+  }
+  
