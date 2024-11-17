@@ -8,6 +8,7 @@ phases:
     commands:
       - echo Building Docker image...
       - docker build -t devops2024/reposd .
+      - pip install pytest:8.3.3 fastapi 
       - docker tag devops2024/reposd:latest 682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest     
       - echo Running tests with docker-compose...
   post_build:
