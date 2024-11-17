@@ -8,7 +8,7 @@
             "TaskDefinition": "taskdef.json",
             "LoadBalancerInfo": {
               "ContainerName": "blacklist_ms_app",
-              "ContainerPort": 80
+              "ContainerPort": 8000
             }
           }
         }
