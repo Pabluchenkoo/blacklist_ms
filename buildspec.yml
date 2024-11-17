@@ -12,6 +12,7 @@ phases:
       - echo Running tests with docker-compose...
       - docker-compose build
       - docker-compose up test
+      - docker-compose down
   post_build:
     commands:
       - echo Build completed on `date`
