@@ -17,7 +17,6 @@ phases:
       - docker push 682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest
       - echo Writing Image Definitions file...
       - printf '{"ImageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest"}' > imageDetail.json
-      - cat imagedefinitions.json
 artifacts:
   files:
     - 'imageDetail.json'
