@@ -28,6 +28,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+async def root():
+    """
+    Root endpoint for health check or welcome message.
+    """
+    return {"message": "Welcome to the FastAPI application!"}
+
 @app.on_event("startup")
 async def on_startup():
     async with engine.begin() as conn:
