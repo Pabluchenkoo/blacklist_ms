@@ -1,9 +1,5 @@
 version: 0.2
 phases:
-  install:
-      commands:
-        - echo Installing dependencies...
-        - pip install pytest==7.2.0 pytest-asyncio==0.20.3 fastapi==0.95.0
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -20,13 +16,10 @@ phases:
       - echo Pushing the Docker image...
       - docker push 682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest
       - echo Writing Image Definitions file...
-      - printf '[{"name":"Container-app-python","imageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest"}]' > imagedefinitions.json
       - printf '{"ImageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest"}' > imageDetail.json
       - cat imagedefinitions.json
 artifacts:
   files:
-    - '**/*'
-    - 'imagedefinitions.json'
     - 'imageDetail.json'
   secondary-artifacts:
     DefinitionArtifact:
