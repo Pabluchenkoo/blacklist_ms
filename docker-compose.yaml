@@ -7,9 +7,9 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - DB_USER=user
-      - DB_PASSWORD=password
-      - DB_HOST=db
+      - DB_USER=userdb
+      - DB_PASSWORD=Wilson12345
+      - DB_HOST=blacklist-db.c724c00qcir1.us-east-1.rds.amazonaws.com
       - DB_PORT=5432
       - DB_NAME=blacklist_db
       - JWT_SECRET_KEY=your-jwt-secret-key

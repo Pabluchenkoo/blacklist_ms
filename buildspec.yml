@@ -8,7 +8,10 @@ phases:
     commands:
       - echo Building Docker image...
       - docker build -t devops2024/reposd .
-      - docker tag devops2024/reposd:latest 682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest       
+      - docker tag devops2024/reposd:latest 682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest     
+      - echo Running tests with docker-compose...
+      - pytest test
+      - docker-compose build   
   post_build:
     commands:
       - echo Build completed on `date`
@@ -23,8 +26,6 @@ artifacts:
     - '**/*'
     - 'imagedefinitions.json'
     - 'imageDetail.json'
-    - 'appspec.yaml'
-    - 'taskdef.json'
   secondary-artifacts:
     DefinitionArtifact:
       files:
