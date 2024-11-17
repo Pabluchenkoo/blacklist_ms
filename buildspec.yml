@@ -21,5 +21,6 @@ phases:
 
 artifacts:
   files:
+    - '**/*'
     - appspec.json
     - taskdef.json
