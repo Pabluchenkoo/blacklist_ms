@@ -24,3 +24,11 @@ artifacts:
     - imageDetail.json
     - taskdef.json
     - appspec.yaml
+  secondary-artifacts:
+    DefinitionArtifact:
+      files:
+        - appspec.yaml
+        - taskdef.json
+    ImageArtifact:
+      files:
+        - imageDetail.json
