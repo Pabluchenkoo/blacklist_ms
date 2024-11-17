@@ -28,7 +28,7 @@ services:
       - JWT_SECRET_KEY=your-jwt-secret-key
       - SECRET_KEY=your-secret-key
       - PYTHONPATH=/app
-      - TEST_DATABASE_URL=postgresql+asyncpg://postgres:Qwerty123@blacklist-db.c724c00qcir1.us-east-1.rds.amazonaws.com:5432/blacklist_db
+      - TEST_DATABASE_URL=postgresql+asyncpg://userdb:Wilson12345@blacklist-db.c724c00qcir1.us-east-1.rds.amazonaws.com:5432/blacklist_db
     depends_on:
       - db
     command: sh -c "pytest tests/ || exit 1"
