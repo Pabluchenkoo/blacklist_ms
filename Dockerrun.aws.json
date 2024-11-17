@@ -1,12 +1,12 @@
 {
     "AWSEBDockerrunVersion": "1",
     "Image": {
-      "Name": "156041410933.dkr.ecr.us-east-1.amazonaws.com/blacklist_ms_app:latest",
+      "Name": "682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest",
       "Update": "true"
     },
     "Ports": [
       {
-        "ContainerPort": "8000"
+        "ContainerPort": "5000"
       }
     ]
 }
