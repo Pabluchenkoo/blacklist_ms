@@ -18,12 +18,11 @@ phases:
       - echo Writing Image Definitions file...
       - printf '[{"name":"Container-app-python","imageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest"}]' > imagedefinitions.json
       - printf '{"ImageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest"}' > imageDetail.json
-      - sed -e 's|<IMAGE1_NAME>|682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest|g' taskdef.json > taskdef_processed.json
       - cat imagedefinitions.json
 artifacts:
   files:
     - appspec.yaml
-    - taskdef_processed.json
+    - taskdef.json
     - imageDetail.json
     - imagedefinitions.json
   name: BuildArtifact
