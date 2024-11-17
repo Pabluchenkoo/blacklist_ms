@@ -16,12 +16,18 @@ phases:
       - echo Pushing the Docker image...
       - docker push 682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest
       - echo Writing Image Definitions file...
-      - printf '[{"name":"Container-app-python","imageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest"}]' > imagedefinitions.json
+      - printf '[{"name":"Container-app-blacklist","imageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest"}]' > imagedefinitions.json
       - printf '{"ImageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest"}' > imageDetail.json
 artifacts:
   files:
+    - '**/*'
     - imagedefinitions.json
     - imageDetail.json
-    - appspec.yaml
-    - taskdef.json
-  name: BuildArtifact
+  secondary-artifacts:
+    DefinitionArtifact:
+      files:
+        - appspec.json
+        - taskdef.json
+    ImageArtifact:
+      files:
+        - imageDetail.json
