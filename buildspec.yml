@@ -24,6 +24,7 @@ artifacts:
     - '**/*'
     - imagedefinitions.json
     - imageDetail.json
+    
   secondary-artifacts:
     DefinitionArtifact:
       files:
