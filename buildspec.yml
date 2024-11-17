@@ -21,8 +21,21 @@ phases:
       - cat imagedefinitions.json
 artifacts:
   files:
-    - appspec.yaml
-    - taskdef.json
     - imageDetail.json
-    - imagedefinitions.json
-  name: BuildArtifact
+  name: ImageArtifact
+
+secondary-artifacts:
+  TaskDefinitionArtifact:
+    files:
+      - taskdef.json
+    name: TaskDefinitionArtifact
+
+  AppSpecArtifact:
+    files:
+      - appspec.yaml
+    name: AppSpecArtifact
+
+  ImageDefinitionsArtifact:
+    files:
+      - imagedefinitions.json
+    name: ImageDefinitionsArtifact
