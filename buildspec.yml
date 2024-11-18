@@ -6,7 +6,7 @@ phases:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 682033463843.dkr.ecr.us-east-1.amazonaws.com
   build:
     commands:
-      - echo Building Docker image..
+      - echo Building Docker image.
       - docker build -t devops2024/reposd .
       - docker tag devops2024/reposd:latest 682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest 
       - echo Running tests with docker-compose...
