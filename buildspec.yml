@@ -10,9 +10,9 @@ phases:
       - docker build -t devops2024/reposd .
       - docker tag devops2024/reposd:latest 682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest 
       - echo Running tests with docker-compose...
-    #  - docker-compose build
-    #  - docker-compose up test
-    #  - docker-compose down
+      - docker-compose build
+      - docker-compose up test
+      - docker-compose down
   post_build:
     commands:
       - echo Build completed on `date`
