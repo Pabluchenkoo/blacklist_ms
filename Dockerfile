@@ -16,3 +16,12 @@ EXPOSE 5000
 
 # Comando para ejecutar la aplicación
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000"]
+
+#configuracion new relic
+RUN pip install newrelic
+ENV NEW_RELIC_APP_NAME="blacklist"
+ENV NEW_RELIC_LOG=stdout
+ENV NEW_RELIC_DISTRIBUTED_TRACING_ENABLED=true
+ENV NEW_RELIC_LICENSE_KEY=eed6e6bf6ad841d69fc97e8fa6488bb7FFFFNRAL
+ENV NEW_RELIC_LOG_LEVEL=info
+ENTRYPOINT [ "newrelic-admin", "run-program" ]

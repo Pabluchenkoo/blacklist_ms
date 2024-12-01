@@ -4,12 +4,15 @@ from main import app
 from app.database import get_db
 from fastapi_jwt_auth import AuthJWT
 from sqlalchemy.ext.asyncio import AsyncSession
-from httpx import AsyncClient
+from httpx import AsyncClient, ASGITransport
+import httpx
+print(f"HTTPX Version: {httpx.__version__}")
 
 # Fixture para el cliente asíncrono
 @pytest.fixture
 async def async_client():
-    async with AsyncClient(app=app, base_url="http://testserver") as client:
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://testserver") as client:
         yield client
 
 # Fixture para mockear AuthJWT

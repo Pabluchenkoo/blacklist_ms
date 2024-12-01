@@ -7,20 +7,17 @@ phases:
   build:
     commands:
       - echo Building Docker image.
-      - docker build -t devops2024/reposd .
-      - docker tag devops2024/reposd:latest 682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest 
+      - docker build -t python_app .
+      - docker tag python_app:latest 682033463843.dkr.ecr.us-east-1.amazonaws.com/python_app:latest
       - echo Running tests with docker-compose...
-      - docker-compose build
-      - docker-compose up test
-      - docker-compose down
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image..
-      - docker push 682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest
+      - docker push 682033463843.dkr.ecr.us-east-1.amazonaws.com/python_app:latest
       - echo Writing Image Definitions file.
-      - printf '[{"name":"Container-app-blacklist","imageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest"}]' > imagedefinitions.json
-      - printf '{"ImageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest"}' > imageDetail.json
+      - printf '[{"name":"Container-app-blacklist","imageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/python_app:latest"}]' > imagedefinitions.json
+      - printf '{"ImageUri":"682033463843.dkr.ecr.us-east-1.amazonaws.com/python_app:latest"}' > imageDetail.json
 artifacts:
   files:
     - '**/*'

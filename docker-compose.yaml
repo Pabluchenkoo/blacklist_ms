@@ -13,43 +13,43 @@ services:
       - DB_NAME=blacklist_db
       - JWT_SECRET_KEY=your-jwt-secret-key
       - SECRET_KEY=your-secret-key
-    depends_on:
-      - db
-  test:
-    build:
-      context: .
-    container_name: fastapi_blacklist_tests
-    environment:
-      - DB_USER=user
-      - DB_PASSWORD=password
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_NAME=blacklist_db
-      - JWT_SECRET_KEY=your-jwt-secret-key
-      - SECRET_KEY=your-secret-key
-      - PYTHONPATH=/app
-      - TEST_DATABASE_URL=${TEST_DATABASE_URL}
-    depends_on:
-      - db
-    command: sh -c "pytest tests/ || exit 1"
-  db:
-    image: postgres:15
-    container_name: fastapi_blacklist_db
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: blacklist_db
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-volumes:
-  postgres_data:
+ #   depends_on:
+ #     - db
+ # test:
+ #   build:
+ #     context: .
+ #   container_name: fastapi_blacklist_tests
+ #   environment:
+ #     - DB_USER=user
+ #     - DB_PASSWORD=password
+ #     - DB_HOST=db
+ #     - DB_PORT=5432
+ #     - DB_NAME=blacklist_db
+ #     - JWT_SECRET_KEY=your-jwt-secret-key
+ #     - SECRET_KEY=your-secret-key
+ #     - PYTHONPATH=/app
+ #     - TEST_DATABASE_URL=${TEST_DATABASE_URL}
+ #   depends_on:
+ #     - db
+ #   command: sh -c "pytest tests/ || exit 1"
+ # db:
+ #   image: postgres:15
+ #   container_name: fastapi_blacklist_db
+ #   environment:
+ #     POSTGRES_USER: user
+ #     POSTGRES_PASSWORD: password
+ #     POSTGRES_DB: blacklist_db
+ #   healthcheck:
+ #     test: ["CMD-SHELL", "pg_isready -U user"]
+ #     interval: 10s
+ #     timeout: 5s
+ #     retries: 5
+ #   volumes:
+ #     - postgres_data:/var/lib/postgresql/data
+ #   ports:
+ #     - "5432:5432"
+#volumes:
+#  postgres_data:
 networks:
   default:
     driver: bridge

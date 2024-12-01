@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "Container-app-blacklist",
-            "image": "682033463843.dkr.ecr.us-east-1.amazonaws.com/devops2024/reposd:latest",
+            "image": "682033463843.dkr.ecr.us-east-1.amazonaws.com/python_app:latest",
             "essential": true,
             "portMappings": [
                 {
