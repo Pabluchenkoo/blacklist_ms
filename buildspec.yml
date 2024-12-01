@@ -9,7 +9,8 @@ phases:
       - echo Building Docker image.
       - docker build -t python_app .
       - docker tag python_app:latest 682033463843.dkr.ecr.us-east-1.amazonaws.com/python_app:latest
-      - echo Running tests with docker-compose...
+      - echo Running tests ....
+      - pytest test/
   post_build:
     commands:
       - echo Build completed on `date`

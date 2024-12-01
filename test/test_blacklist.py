@@ -5,8 +5,9 @@ from app.database import get_db
 from fastapi_jwt_auth import AuthJWT
 from sqlalchemy.ext.asyncio import AsyncSession
 from httpx import AsyncClient, ASGITransport
-import httpx
-print(f"HTTPX Version: {httpx.__version__}")
+import asyncio
+import random
+
 
 # Fixture para el cliente asíncrono
 @pytest.fixture
@@ -44,30 +45,39 @@ def override_dependencies(mock_authjwt, mock_db):
     yield
     app.dependency_overrides = {}
 
-# Prueba para agregar un correo a la lista negra cuando no existe previamente
 @pytest.mark.asyncio
-async def test_add_to_blacklist(mock_db, async_client):
-    blacklist_data = {
-        "email": "test@example.com",
-        "app_uuid": "123e4567-e89b-12d3-a456-426614174000",
-        "blocked_reason": "Spam"
-    }
+async def test_add_to_blacklist_stress(mock_db, async_client):
+    async def make_request(i):
+        # Introducir un retraso para distribuir las solicitudes en 10 segundos
+        await asyncio.sleep(i * 0.5)  # Espaciado de 0.5 segundos entre solicitudes
 
-    # Configurar el mock para que simule que el correo no está en la lista negra
-    async def mock_execute(*args, **kwargs):
-        class Result:
-            def scalars(self):
-                class Scalars:
-                    def first(self):
-                        return None  # Simula que el correo no existe
-                return Scalars()
-        return Result()
-    mock_db.execute.side_effect = mock_execute
-    mock_db.commit = AsyncMock()
+        blacklist_data = {
+            "email": f"test_stress_{i}@example.com",
+            "app_uuid": "123e4567-e89b-12d3-a456-426614174000",
+            "blocked_reason": "Stress Test"
+        }
 
-    response = await async_client.post("/blacklists/", json=blacklist_data)
-    assert response.status_code == 201
-    assert response.json() == {"message": "Email added to the blacklist successfully."}
+        # Configurar el mock para que simule que el correo no está en la lista negra
+        async def mock_execute(*args, **kwargs):
+            class Result:
+                def scalars(self):
+                    class Scalars:
+                        def first(self):
+                            return None  # Simula que el correo no existe
+                    return Scalars()
+            return Result()
+
+        mock_db.execute.side_effect = mock_execute
+        mock_db.commit = AsyncMock()
+
+        response = await async_client.post("/blacklists/", json=blacklist_data)
+        assert response.status_code == 201
+        assert response.json() == {"message": "Email added to the blacklist successfully."}
+
+    tasks = []
+    for i in range(20):
+        tasks.append(make_request(i))
+    await asyncio.gather(*tasks)
 
 # Prueba para intentar agregar un correo que ya existe
 @pytest.mark.asyncio
