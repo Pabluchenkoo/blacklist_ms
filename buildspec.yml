@@ -10,7 +10,8 @@ phases:
       - docker build -t python_app .
       - docker tag python_app:latest 682033463843.dkr.ecr.us-east-1.amazonaws.com/python_app:latest
       - echo Running tests ....
-      - pip install pytest asyncio fastapi==0.95.0 httpx==0.28.0 pytest-asyncio
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
       - pytest test/
   post_build:
     commands:
